@@ -1,38 +1,39 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+// import reactLogo from './assets/react.svg'
 import './App.css'
 
+import { Editor } from '@monaco-editor/react'
 import NavBar from './components/NavBar';
+import StaticBadge from './components/StaticBadge';
+import Donating from './components/Donating';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+
+  const code = '// my infomation\nconst INFO = {\n\tname: "Reza Mousavi",\n\tgithub: "https://github.com/iamrezamousavi"\n}';
 
   return (
     <>
       <NavBar />
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
+      {/* <div>
         <a href="https://react.dev" target="_blank" rel="noreferrer">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
-      </div>
-      <h1>Reza Mousavi</h1>
+      </div> */}
+      <h1>A Software engineer</h1>
+      <StaticBadge />
+      <Editor theme='vs-dark' width='100%' height='50vh' defaultLanguage='javascript' defaultValue={code} />
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
       <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+        Click on github link to learn more
       </p>
+      <Donating />
     </>
   )
 }
 
-export default App
+export default App;
