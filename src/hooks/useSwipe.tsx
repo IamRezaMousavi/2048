@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
 
-interface Input {
+interface InputType {
     left: () => void,
     right: () => void,
     up: () => void,
     down: () => void,
 }
 
-export default function useSwipe({left, right, up, down}: Input) {
+export default function useSwipe({left, right, up, down}: InputType) {
   const touchCoordsRef = useRef({touchStart: {x: 0, y: 0, time: Date.now()}});
   const fnsRef = useRef({up, down, left, right});
   fnsRef.current = {

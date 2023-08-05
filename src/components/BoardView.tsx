@@ -26,7 +26,7 @@ const BoardView: React.FC = () => {
     if (board.hasWon())
       return;
     const boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
-    const newBoard = boardClone.move(0);
+    const newBoard = boardClone.move(2);
     setBoard(newBoard);
   };
 
@@ -34,7 +34,7 @@ const BoardView: React.FC = () => {
     if (board.hasWon())
       return;
     const boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
-    const newBoard = boardClone.move(2);
+    const newBoard = boardClone.move(0);
     setBoard(newBoard);
   };
 
@@ -42,7 +42,7 @@ const BoardView: React.FC = () => {
     if (board.hasWon())
       return;
     const boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
-    const newBoard = boardClone.move(1);
+    const newBoard = boardClone.move(3);
     setBoard(newBoard);
   };
 
@@ -50,7 +50,7 @@ const BoardView: React.FC = () => {
     if (board.hasWon())
       return;
     const boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
-    const newBoard = boardClone.move(3);
+    const newBoard = boardClone.move(1);
     setBoard(newBoard);
   };
 
