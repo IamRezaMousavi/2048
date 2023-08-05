@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 const Cell: React.FC = () => {
-    return (
-        <div className="cell"></div>
-    )
+  return (
+    <div className="cell"></div>
+  )
 }
 
 export default Cell;
