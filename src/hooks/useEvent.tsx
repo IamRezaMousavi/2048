@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
 export default function useEvent(
-  event: any,
-  handler: { (this: Window, ev: any): any; (this: Window, ev: any): any; },
+  event: string,
+  handler: (event: any) => void,
   passive = false
 ) {
   useEffect(() => {

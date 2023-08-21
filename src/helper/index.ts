@@ -98,12 +98,23 @@ class Board {
     this.setPositions();
     this.won = false;
   }
+  clone() {
+    const newBoard = new Board();
+    newBoard.tiles = this.tiles;
+    newBoard.cells = this.cells;
+    newBoard.score = this.score;
+    newBoard.size = this.size;
+    newBoard.fourProbability = this.fourProbability;
+    newBoard.deltaX = this.deltaX;
+    newBoard.deltaY = this.deltaY;
+    newBoard.won = this.won;
+    return newBoard;
+  }
   addTile(value = 0) {
     const res = new Tile(value);
     this.tiles.push(res);
     return res;
   }
-
   moveLeft() {
     let hasChanged = false;
     for (let row = 0; row < this.size; ++row) {

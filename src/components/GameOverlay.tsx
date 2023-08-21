@@ -3,7 +3,7 @@ import { Board } from '../helper';
 import TryAgainLogo from '../assets/img/try-again.gif';
 
 interface PropType {
-    onRestart: any,
+    onRestart: () => void,
     board: Board,
 }
 

@@ -9,12 +9,10 @@ import useSwipe from '../hooks/useSwipe';
 const BoardView: React.FC = () => {
   const [board, setBoard] = useState<Board>(new Board());
 
-  const handleKeyDown = (event: any) => {
-    if (board.hasWon())
-      return;
+  const handleKeyDown = (event: KeyboardEvent) => {
     if (event.keyCode >= 37 && event.keyCode <= 40) {
       const direction = event.keyCode - 37;
-      const boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
+      const boardClone = board.clone();
       const newBoard = boardClone.move(direction);
       setBoard(newBoard);
     }
@@ -25,7 +23,7 @@ const BoardView: React.FC = () => {
   const onSwipedLeft = () => {
     if (board.hasWon())
       return;
-    const boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
+    const boardClone = board.clone();
     const newBoard = boardClone.move(2);
     setBoard(newBoard);
   };
@@ -33,7 +31,7 @@ const BoardView: React.FC = () => {
   const onSwipedRight = () => {
     if (board.hasWon())
       return;
-    const boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
+    const boardClone = board.clone();
     const newBoard = boardClone.move(0);
     setBoard(newBoard);
   };
@@ -41,7 +39,7 @@ const BoardView: React.FC = () => {
   const onSwipedUp = () => {
     if (board.hasWon())
       return;
-    const boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
+    const boardClone = board.clone();
     const newBoard = boardClone.move(3);
     setBoard(newBoard);
   };
@@ -49,7 +47,7 @@ const BoardView: React.FC = () => {
   const onSwipedDown = () => {
     if (board.hasWon())
       return;
-    const boardClone = Object.assign(Object.create(Object.getPrototypeOf(board)), board);
+    const boardClone = board.clone();
     const newBoard = boardClone.move(1);
     setBoard(newBoard);
   };
