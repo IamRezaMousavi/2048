@@ -19,12 +19,14 @@ export default function useSwipe({left, right, up, down}: InputType) {
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
       e.preventDefault();
+      
       touchCoordsRef.current.touchStart.x = e.targetTouches[0].clientX;
       touchCoordsRef.current.touchStart.y = e.targetTouches[0].clientY;
       touchCoordsRef.current.touchStart.time = Date.now();
     };
     const handleTouchEnd = (e: TouchEvent) => {
       e.preventDefault();
+
       const threshold = 150;
       const swipeSpeed = 1; // sec;
       const touchEndX = e.changedTouches[0].clientX;

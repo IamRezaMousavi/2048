@@ -4,6 +4,7 @@
 }
 
 body {
+  overscroll-behavior: none;
   display: flex;
   background-color: #57407c;
   flex-direction: column;
