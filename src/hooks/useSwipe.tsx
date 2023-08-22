@@ -45,9 +45,9 @@ export default function useSwipe({left, right, up, down}: InputType) {
       }
   
       if(Math.abs(xDistance) >= Math.abs(yDistance)) {
-        xDistance > 0 ? fnsRef.current.right?.() : fnsRef.current.left?.();
+        xDistance > 0 ? fnsRef.current.right() : fnsRef.current.left();
       } else {
-        yDistance > 0 ? fnsRef.current.down?.() : fnsRef.current.up?.();
+        yDistance > 0 ? fnsRef.current.down() : fnsRef.current.up();
       }
     };
     window.addEventListener('touchstart', handleTouchStart);

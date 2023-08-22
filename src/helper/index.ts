@@ -122,12 +122,14 @@ class Board {
       const resultRow = [];
       for (let target = 0; target < this.size; ++target) {
         let targetTile = currentRow.length
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           ? currentRow.shift()!
           : this.addTile();
         if (currentRow.length > 0 && currentRow[0].value === targetTile.value) {
           const tile1 = targetTile;
           targetTile = this.addTile(targetTile.value);
           tile1.mergedInto = targetTile;
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           const tile2 = currentRow.shift()!;
           tile2.mergedInto = targetTile;
           targetTile.value += tile2.value;
@@ -183,7 +185,7 @@ class Board {
     return this;
   }
   clearOldTiles() {
-    this.tiles = this.tiles.filter((tile) => tile.markForDeletion === false);
+    this.tiles = this.tiles.filter((tile) => !tile.markForDeletion);
     this.tiles.forEach((tile) => {
       tile.markForDeletion = true;
     });

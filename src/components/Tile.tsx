@@ -21,7 +21,7 @@ const Tile: React.FC<PropType> = ({tile}) => {
   }
 
   const classes = classArray.join(' ');
-  return <span className={classes}></span>;
+  return <span className={classes} />;
 }
 
 export default Tile;
