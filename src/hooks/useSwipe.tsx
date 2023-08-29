@@ -19,7 +19,7 @@ export default function useSwipe({left, right, up, down}: InputType) {
   useEffect(() => {
     const handleTouchStart = (e: TouchEvent) => {
       e.preventDefault();
-      
+
       touchCoordsRef.current.touchStart.x = e.targetTouches[0].clientX;
       touchCoordsRef.current.touchStart.y = e.targetTouches[0].clientY;
       touchCoordsRef.current.touchStart.time = Date.now();
@@ -34,17 +34,17 @@ export default function useSwipe({left, right, up, down}: InputType) {
       const touchStartX = touchCoordsRef.current.touchStart.x;
       const touchStartY = touchCoordsRef.current.touchStart.y;
       const elapsedTime = (Date.now() - touchCoordsRef.current.touchStart.time) / 1000;
-      if(elapsedTime > swipeSpeed) {
+      if (elapsedTime > swipeSpeed) {
         return;
       }
       const xDistance = touchStartX - touchEndX;
       const yDistance = touchStartY - touchEndY;
-  
-      if(Math.abs(xDistance) < threshold && Math.abs(yDistance) < threshold) {
+
+      if (Math.abs(xDistance) < threshold && Math.abs(yDistance) < threshold) {
         return;
       }
-  
-      if(Math.abs(xDistance) >= Math.abs(yDistance)) {
+
+      if (Math.abs(xDistance) >= Math.abs(yDistance)) {
         xDistance > 0 ? fnsRef.current.right() : fnsRef.current.left();
       } else {
         yDistance > 0 ? fnsRef.current.down() : fnsRef.current.up();

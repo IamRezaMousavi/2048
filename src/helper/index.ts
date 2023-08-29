@@ -1,16 +1,3 @@
-const rotateLeft = function (matrix: Tile[][]) {
-  const rows = matrix.length;
-  const columns = matrix[0].length;
-  const res: Tile[][] = [];
-  for (let row = 0; row < rows; ++row) {
-    res.push([]);
-    for (let column = 0; column < columns; ++column) {
-      res[row][column] = matrix[column][columns - row - 1];
-    }
-  }
-  return res;
-};
-
 interface Cell {
   row: number,
   column: number,
@@ -36,15 +23,18 @@ class Tile {
     this.mergedInto = null;
     this.id = this.id++ || 0;
   }
+
   moveTo(row: number, column: number) {
     this.oldRow = this.row;
     this.oldColumn = this.column;
     this.row = row;
     this.column = column;
   }
+
   isNew() {
     return this.oldRow === -1 && !this.mergedInto;
   }
+
   hasMoved() {
     return (
       (this.fromRow() !== -1 &&
@@ -53,15 +43,19 @@ class Tile {
       this.mergedInto
     );
   }
+
   fromRow() {
     return this.mergedInto ? this.row : this.oldRow;
   }
+
   fromColumn() {
     return this.mergedInto ? this.column : this.oldColumn;
   }
+
   toRow() {
     return this.mergedInto ? this.mergedInto.row : this.row;
   }
+
   toColumn() {
     return this.mergedInto ? this.mergedInto.column : this.column;
   }
@@ -98,6 +92,7 @@ class Board {
     this.setPositions();
     this.won = false;
   }
+
   clone() {
     const newBoard = new Board();
     newBoard.tiles = this.tiles;
@@ -110,11 +105,13 @@ class Board {
     newBoard.won = this.won;
     return newBoard;
   }
+
   addTile(value = 0) {
     const res = new Tile(value);
     this.tiles.push(res);
     return res;
   }
+
   moveLeft() {
     let hasChanged = false;
     for (let row = 0; row < this.size; ++row) {
@@ -143,6 +140,21 @@ class Board {
     }
     return hasChanged;
   }
+
+  rotateLeft() {
+    const matrix = this.cells;
+    const rows = matrix.length;
+    const columns = matrix[0].length;
+    const res: Tile[][] = [];
+    for (let row = 0; row < rows; ++row) {
+      res.push([]);
+      for (let column = 0; column < columns; ++column) {
+        res[row][column] = matrix[column][columns - row - 1];
+      }
+    }
+    return res;
+  }
+
   setPositions() {
     this.cells.forEach((row, rowIndex) => {
       row.forEach((tile, columnIndex) => {
@@ -154,12 +166,13 @@ class Board {
       });
     });
   }
+
   addRandomTile() {
     const emptyCells = [];
     for (let r = 0; r < this.size; ++r) {
       for (let c = 0; c < this.size; ++c) {
         if (this.cells[r][c].value === 0) {
-          emptyCells.push({ r: r, c: c });
+          emptyCells.push({ r, c });
         }
       }
     }
@@ -168,15 +181,16 @@ class Board {
     const newValue = Math.random() < this.fourProbability ? 4 : 2;
     this.cells[cell.r][cell.c] = this.addTile(newValue);
   }
+
   move(direction: number) {
     // 0 -> left, 1 -> up, 2 -> right, 3 -> down
     this.clearOldTiles();
     for (let i = 0; i < direction; ++i) {
-      this.cells = rotateLeft(this.cells);
+      this.cells = this.rotateLeft();
     }
     const hasChanged = this.moveLeft();
     for (let i = direction; i < 4; ++i) {
-      this.cells = rotateLeft(this.cells);
+      this.cells = this.rotateLeft();
     }
     if (hasChanged) {
       this.addRandomTile();
@@ -184,15 +198,18 @@ class Board {
     this.setPositions();
     return this;
   }
+
   clearOldTiles() {
     this.tiles = this.tiles.filter((tile) => !tile.markForDeletion);
     this.tiles.forEach((tile) => {
       tile.markForDeletion = true;
     });
   }
+
   hasWon() {
     return this.won;
   }
+
   hasLost() {
     let canMove = false;
     for (let row = 0; row < this.size; ++row) {

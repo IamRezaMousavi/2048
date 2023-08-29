@@ -66,33 +66,33 @@ const BoardView: React.FC = () => {
           return <Cell key={rowIndex * board.size + colIndex} />;
         })}
       </div>
-    )
+    );
   });
 
   const tiles = board.tiles.filter((tile) => tile.value !== 0).map((tile, index) => {
     return <Tile tile={tile} key={index} />;
-  })
+  });
 
   const resetGame = () => {
     setBoard(new Board());
-  }
+  };
 
   return (
     <div>
-      <div className="details-box">
-        <div className="resetButton" onClick={resetGame}>New Game</div>
-        <div className="score-box">
-          <div className="score-header">SCORE</div>
+      <div className='details-box'>
+        <div className='resetButton' onClick={resetGame}>New Game</div>
+        <div className='score-box'>
+          <div className='score-header'>SCORE</div>
           <div>{board.score}</div>
         </div>
       </div>
-      <div className="board">
+      <div className='board'>
         {cells}
         {tiles}
         <GameOverlay onRestart={resetGame} board={board} />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default BoardView;
