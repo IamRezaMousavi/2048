@@ -31,32 +31,32 @@ class Tile {
     this.column = column;
   }
 
-  isNew() {
+  isNew(): boolean {
     return this.oldRow === -1 && !this.mergedInto;
   }
 
-  hasMoved() {
+  hasMoved(): boolean {
     return (
       (this.fromRow() !== -1 &&
         (this.fromRow() !== this.toRow() ||
           this.fromColumn() !== this.toColumn())) ||
-      this.mergedInto
+      this.mergedInto !== null
     );
   }
 
-  fromRow() {
+  fromRow(): number {
     return this.mergedInto ? this.row : this.oldRow;
   }
 
-  fromColumn() {
+  fromColumn(): number {
     return this.mergedInto ? this.column : this.oldColumn;
   }
 
-  toRow() {
+  toRow(): number {
     return this.mergedInto ? this.mergedInto.row : this.row;
   }
 
-  toColumn() {
+  toColumn(): number {
     return this.mergedInto ? this.mergedInto.column : this.column;
   }
 }
@@ -93,7 +93,7 @@ class Board {
     this.won = false;
   }
 
-  clone() {
+  clone(): Board {
     const newBoard = new Board();
     newBoard.tiles = this.tiles;
     newBoard.cells = this.cells;
@@ -106,13 +106,13 @@ class Board {
     return newBoard;
   }
 
-  addTile(value = 0) {
+  addTile(value = 0): Tile {
     const res = new Tile(value);
     this.tiles.push(res);
     return res;
   }
 
-  moveLeft() {
+  moveLeft(): boolean {
     let hasChanged = false;
     for (let row = 0; row < this.size; ++row) {
       const currentRow = this.cells[row].filter((tile) => tile.value !== 0);
@@ -141,7 +141,7 @@ class Board {
     return hasChanged;
   }
 
-  rotateLeft() {
+  rotateLeft(): Tile[][] {
     const matrix = this.cells;
     const rows = matrix.length;
     const columns = matrix[0].length;
@@ -182,7 +182,7 @@ class Board {
     this.cells[cell.r][cell.c] = this.addTile(newValue);
   }
 
-  move(direction: number) {
+  move(direction: number): this {
     // 0 -> left, 1 -> up, 2 -> right, 3 -> down
     this.clearOldTiles();
     for (let i = 0; i < direction; ++i) {
@@ -206,11 +206,11 @@ class Board {
     });
   }
 
-  hasWon() {
+  hasWon(): boolean {
     return this.won;
   }
 
-  hasLost() {
+  hasLost(): boolean {
     let canMove = false;
     for (let row = 0; row < this.size; ++row) {
       for (let column = 0; column < this.size; ++column) {

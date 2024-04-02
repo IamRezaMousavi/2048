@@ -215,6 +215,12 @@ module.exports = {
     '@typescript-eslint/prefer-regexp-exec': 'error',
     '@typescript-eslint/promise-function-async': 'error',
     '@typescript-eslint/require-array-sort-compare': 'error',
+    '@typescript-eslint/restrict-template-expressions': [
+      'error',
+      {
+        "allowNumber": true
+      }
+    ],
     '@typescript-eslint/sort-type-constituents': 'error',
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
     '@typescript-eslint/type-annotation-spacing': 'error',
