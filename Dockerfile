@@ -11,7 +11,7 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:1.27.2-alpine3.20
+FROM nginx:1.27.3-alpine3.20
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /var/www/html/
